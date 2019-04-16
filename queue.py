@@ -24,12 +24,13 @@ class LinkedQueue(object):
         return self.list is None
 
     def length(self):   
-        """Return the number of items in this queue."""
+        """Return the number of items in this queue.
+        Running time: O(1) - python built in speed, single check of size"""
         return len(self.list)
 
     def enqueue(self, item):
         """Insert the given item at the back of this queue.
-        Running time: O(1) – Why? [TODO]"""
+        Running time: O(1) - single append operation"""
         self.list.append(item)
 
     def front(self):
@@ -39,14 +40,16 @@ class LinkedQueue(object):
             return None
         
         return self.list.get_at_index(0)
-        
-
 
     def dequeue(self):
         """Remove and return the item at the front of this queue,
         or raise ValueError if this queue is empty.
-        Running time: O(???) – Why? [TODO]"""
-        # TODO: Remove and return front item, if any
+        Running time: """
+        if self.is_empty():
+            raise ValueError("Cannot dequeue an empty queue")
+        
+        item = self.front()
+        self.list.delete(item)
 
 
 # Implement ArrayQueue below, then change the assignment at the bottom
