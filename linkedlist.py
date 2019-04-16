@@ -97,8 +97,7 @@ class LinkedList(object):
         # Check if the given index is out of range and if so raise an error
         if not (0 <= index <= self.size):
             raise ValueError('List index out of range: {}'.format(index))
-        # TODO: Find the node before the given index and insert item after it
-        
+
         # Check if index is head or tail
         if index == 0:
             return self.prepend(item)
@@ -112,7 +111,7 @@ class LinkedList(object):
             prev_node = prev_node.next
 
         new_node = Node(item) # Create new Node object with given item
-        new_node.next = prev_node.next # set its next pointer to the next node
+        new_node.next = prev_node.next # set its next pointer to the next node (None)
 
         # Change previous node to point to newly created node
         prev_node.next = new_node
@@ -183,11 +182,11 @@ class LinkedList(object):
             old_node = self.head
             while old_node and old_node.data is not old_item: # Unsure how long this may take, hence while.
                 old_node = old_node.next
-            
             if old_node is not None:
                 old_node.data = new_item
-            else:
-                raise ValueError("Item", old_item, "is not a member of this linked list.")
+                return
+            
+            raise ValueError("Item", old_item, "is not a member of this linked list.")
 
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.
