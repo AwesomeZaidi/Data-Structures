@@ -11,7 +11,7 @@ def is_palindrome(text):
     """A string of characters is a palindrome ife it reads the sam forwards and
     backwards, ignoring punctuation, whitespace, and letter casing."""
     assert isinstance(text, str), 'input is not a string: {}'.format(text)
-    return is_palindrome_recursive(text)
+    return is_palindrome_iterative(text)
 
 
 def is_palindrome_iterative(text):
@@ -27,11 +27,18 @@ def is_palindrome_iterative(text):
     """
     
     source = text.lower()   # Time: O(n), Space: O(n) 🏃‍
+    print('source:', source)
     # left & right index of source
     left = 0
     right = len(source) - 1    # O(1) 💨
 
     while left <= right:    # while left 🛑✋'s before passing right
+        if text[left] in string.punctuation or text[left] == ' ':
+            left += 1
+            continue
+        if text[right] in string.punctuation or text[right] == ' ':
+            right -= 1
+            continue
         if source[left] != source[right]:
             return False    # 😭
         left += 1
