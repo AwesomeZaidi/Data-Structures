@@ -1,5 +1,27 @@
 #!python
 
+# Helper Function(s)
+def find_pattern_index(text, pattern, list = None):
+    '''
+        Goes through text array to find a pattern, returns index where it's is found.
+    '''
+    new_list = []
+    for i in range(len(text)):
+        if text[i:i+len(pattern)] == pattern:
+            if list == []:
+                new_list.append(i)
+            else:
+                return i
+    
+    if new_list != []: # We found all the starting indexes
+        print('returning new_list:', new_list)
+        return new_list
+
+    if list == []: # We didn't find any starting indexes so we need to return an empty list with this check.
+        return []  
+    
+    return None # This will be called for find_index func.
+
 def contains(text, pattern):
     # in Recursiive solution add arguments:  text_index = 0, pattern_index = 0
     """Return a boolean indicating whether pattern occurs in text."""
@@ -70,28 +92,19 @@ def find_index(text, pattern):
     if len(pattern) == 0:
         return 0
     
-    for i in range(len(text)):
-        if text[i:i+len(pattern)] == pattern:
-            return i
-    
-    return None
+    return find_pattern_index(text, pattern)
 
 def find_all_indexes(text, pattern):
     """Return a list of starting indexes of all occurrences of pattern in text,
     or an empty list if not found."""
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
-    # TODO: Implement find_all_indexes here (iteratively and/or recursively)
     starting_idxs = []
 
     if len(pattern) == 0:
         return [idx for idx, ltr in enumerate(text)] 
 
-    for i in range(len(text)):
-        if text[i:i+len(pattern)] == pattern:
-            starting_idxs.append(i)
-
-    return starting_idxs
+    return find_pattern_index(text, pattern, starting_idxs)
 
 def test_string_algorithms(text, pattern):
     found = contains(text, pattern)
