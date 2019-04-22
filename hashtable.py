@@ -27,7 +27,7 @@ class HashTable(object):
         """ Return the load factor, the ratio of number of entries to buckets.
             Running time: O(1) divides attributes
         """
-        return float(self.size) / float(self.buckets)
+        return float(self.size) / float(len(self.buckets))
 
     def keys(self):
         """Return a list of all keys in this hash table.
@@ -37,7 +37,7 @@ class HashTable(object):
         # Collect all keys in each of the buckets
         all_keys = []
         for bucket in self.buckets:
-            for key, value in bucket.items():
+            for key, _ in bucket.items():
                 all_keys.append(key)
         return all_keys
 
@@ -116,10 +116,12 @@ class HashTable(object):
             # In this case, the given key's value is being updated
             # Remove the old key-value entry from the bucket first
             bucket.delete(entry)
+            self.size -= 1
         # Insert the new key-value entry into the bucket in either case
         bucket.append((key, value))
+        self.size += 1
         # TODO: Check if the load factor exceeds a threshold such as 0.75
-        if self.load_factor() > .75: # If so, automatically resize to reduce the load factor
+        if self.load_factor() > 0.75: # If so, automatically resize to reduce the load factor
             self._resize() # This func call witll return ...
 
     def delete(self, key):
@@ -134,6 +136,7 @@ class HashTable(object):
         if entry is not None:  # Found
             # Remove the key-value entry from the bucket
             bucket.delete(entry) # O(n) from LinkedList function
+            self.size -= 1
         else:  # Not found
             raise KeyError('Key not found: {}'.format(key))
 
@@ -154,6 +157,7 @@ class HashTable(object):
         all_kv_entries = self.items() # O(n)
         # Create a new list of new_size total empty linked list buckets
         new_buckets = [LinkedList() for i in range(new_size)]
+        self.size = 0
         self.buckets = new_buckets
         # Insert each key-value entry into the new list of buckets,
         # which will rehash them into a new bucket index based on the new size
