@@ -54,8 +54,19 @@ class SetTest(unittest.TestCase):
         union_items = unions.map.keys()
         assert union_items == [1,2,3,4,5,7]
 
+    def test_intersection(self):
+        test_set = Set([1,2,3,4,5])
+        other_set = Set([1,2,3,7])
+        unions = test_set.intersection(other_set)
+        union_items = unions.map.keys()
+        assert union_items == [1,2,3]
 
-
+    def test_difference(self):
+        test_set = Set([1,2,3,4,5])
+        other_set = Set([1,2,3,7])
+        unions = test_set.difference(other_set)
+        union_items = unions.map.keys()
+        assert union_items == [1,2,3]
 
 if __name__ == '__main__':
     unittest.main()
