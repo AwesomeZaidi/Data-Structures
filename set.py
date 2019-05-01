@@ -21,7 +21,7 @@ class Set(object):
         """add element to this set, if not present already"""
         # check if its unique by 
         # if not self.contains(element):
-        self.map.set(element, True)
+        self.map.set(element, None)
 
     def remove(self, element):
         """remove element from this set, if present, or else raise KeyError"""
