@@ -21,12 +21,12 @@ class LinkedQueue(object):
 
     def is_empty(self):
         """Return True if this queue is empty, or False otherwise."""
-        return self.list is None
+        return self.list.is_empty()
 
     def length(self):   
         """Return the number of items in this queue.
         Running time: O(1) - python built in speed, single check of size"""
-        return len(self.list)
+        return self.list.length()
 
     def enqueue(self, item):
         """Insert the given item at the back of this queue.
@@ -36,20 +36,20 @@ class LinkedQueue(object):
     def front(self):
         """Return the item at the front of this queue without removing it,
         or None if this queue is empty."""
-        if self.is_empty():
+        if self.length() == 0:
             return None
-        
-        return self.list.get_at_index(0)
+        return self.list.head.data
 
     def dequeue(self):
         """Remove and return the item at the front of this queue,
-        or raise ValueError if this queue is empty.
-        Running time: """
+        or raise ValueError if this queue is empty."""
         if self.is_empty():
             raise ValueError("Cannot dequeue an empty queue")
         
-        item = self.front()
+        # item = self.front()
+        item = self.list.head.data
         self.list.delete(item)
+        return item
 
 
 # Implement ArrayQueue below, then change the assignment at the bottom
@@ -92,12 +92,12 @@ class ArrayQueue(object):
         """Remove and return the item at the front of this queue,
         or raise ValueError if this queue is empty.
         Running time: O(???) – Why? [TODO]"""
-        if self.is_empty():
-            raise ValueError("Cannot dequeue an empty queue")
+        if self.length() == 0:
+            raise ValueError("Queue is empty.")
         return self.list.pop(0)
 
 
 # Implement LinkedQueue and ArrayQueue above, then change the assignment below
 # to use each of your Queue implementations to verify they each pass all tests
-# Queue = LinkedQueue
-Queue = ArrayQueue
+Queue = LinkedQueue
+# Queue = ArrayQueue
