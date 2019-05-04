@@ -21,11 +21,14 @@ class LinkedStack(object):
 
     def is_empty(self):
         """Return True if this stack is empty, or False otherwise."""
-        return self.is_empty()
+        return self.list.is_empty()
+
+    def __len__(self):
+        return self.length()
 
     def length(self):
         """Return the number of items in this stack."""
-        return len(self.list)
+        return self.list.length()
 
     def push(self, item):
         """Insert the given item on the top of this stack.
@@ -37,16 +40,19 @@ class LinkedStack(object):
         or None if this stack is empty."""
         if self.is_empty():
             return None
-        return self.list.head.date
+        return self.list.head.data
 
     def pop(self):
         """Remove and return the item on the top of this stack,
         or raise ValueError if this stack is empty.
-        Running time: O(???) – Why? [TODO]"""
+        Running time: O(???) – Why?"""
         # return delete item from head
-        for node in self.list:
-            if node.data is self.list.tail:
-                return self.list.delete(node)
+        if self.list.is_empty():
+            raise ValueError("Empty Stack")
+
+        item = self.list.head.data
+        self.list.delete(item)
+        return item
 
 
 # Implement ArrayStack below, then change the assignment at the bottom
@@ -76,14 +82,14 @@ class ArrayStack(object):
     def push(self, item):
         """Insert the given item on the top of this stack.
         Running time: O(???) – Why? [TODO]"""
-        self.list.append(0, item)
+        self.list.insert(0, item)
 
     def peek(self):
         """Return the item on the top of this stack without removing it,
         or None if this stack is empty."""
-        if self.is_empty():
-            return None
-        return self.list[-1]
+        if self.length() > 0:
+            return self.list[-1]
+        return None
 
     def pop(self):
         """Remove and return the item on the top of this stack,
@@ -91,7 +97,7 @@ class ArrayStack(object):
         Running time: O(???) – Why? [TODO]"""
         if self.is_empty():
             raise ValueError("Cannot pop an empty stack")
-        return self.list.pop(-1)
+        return self.list.pop()
 
 
 # Implement LinkedStack and ArrayStack above, then change the assignment below
