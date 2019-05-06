@@ -2,7 +2,6 @@
 
 from linkedlist import LinkedList
 
-
 # Implement LinkedQueue below, then change the assignment at the bottom
 # to use this Queue implementation to verify it passes all tests
 class LinkedQueue(object):
@@ -70,7 +69,7 @@ class ArrayQueue(object):
 
     def is_empty(self):
         """Return True if this queue is empty, or False otherwise."""
-        return self.list is None
+        return len(self.list) == 0
 
     def length(self):
         """Return the number of items in this queue."""
@@ -84,7 +83,7 @@ class ArrayQueue(object):
     def front(self):
         """Return the item at the front of this queue without removing it,
         or None if this queue is empty."""
-        if self.is_empty is None:
+        if self.is_empty():
             return None
         return self.list[0]
 
@@ -99,5 +98,5 @@ class ArrayQueue(object):
 
 # Implement LinkedQueue and ArrayQueue above, then change the assignment below
 # to use each of your Queue implementations to verify they each pass all tests
-Queue = LinkedQueue
-# Queue = ArrayQueue
+# Queue = LinkedQueue
+Queue = ArrayQueue
