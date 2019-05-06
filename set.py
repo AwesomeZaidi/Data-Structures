@@ -10,6 +10,7 @@ class Set(object):
         self.size = 0 # property that tracks the number of elements in constant time
         if elements is not None:
             for element in elements:
+                self.size += 1 
                 self.map.set(element, True)
     
     def contains(self, element):
@@ -22,6 +23,8 @@ class Set(object):
         # check if its unique by 
         # if not self.contains(element):
         self.map.set(element, None)
+        self.size += 1
+        return self.size
 
     def remove(self, element):
         """remove element from this set, if present, or else raise KeyError"""
@@ -29,6 +32,8 @@ class Set(object):
         # if self.elements.___contains__(element):
         # if self.contains(element):
         self.map.delete(element)
+        self.size -= 1
+        return self.size
         # else:
         #     raise KeyError('Element not found: {}'.format(element))
     
@@ -64,3 +69,9 @@ class Set(object):
 
         return new_set
         
+    def issubset(self, other_set):
+        """Return true if all the elements in a set exist in the other set, False if not."""
+        for item in self.map.keys():
+            if item not in self.map.keys():
+                return False
+        return True
