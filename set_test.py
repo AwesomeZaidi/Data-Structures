@@ -68,5 +68,15 @@ class SetTest(unittest.TestCase):
         union_items = unions.map.keys()
         assert union_items == [1,2,3]
 
+    def test_issubset(self):
+        test_set = Set([1, 2, 3])
+        other_set = Set([4, 5, 7])
+        assert test_set.issubset(other_set) == False
+        assert other_set.issubset(test_set) == False
+        test_set = Set(["b", "b", "a"])
+        other_set = Set(["a", "b", "b"])
+        assert test_set.issubset(other_set) == True
+        assert other_set.issubset(test_set) == True
+
 if __name__ == '__main__':
     unittest.main()

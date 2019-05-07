@@ -72,6 +72,7 @@ class Set(object):
     def issubset(self, other_set):
         """Return true if all the elements in a set exist in the other set, False if not."""
         for item in self.map.keys():
-            if item not in self.map.keys():
+            print('item in test_set:', item)
+            if item not in other_set.map.keys():
                 return False
         return True

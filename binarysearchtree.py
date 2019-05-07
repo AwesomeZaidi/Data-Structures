@@ -76,7 +76,7 @@ class BinarySearchTree(object):
         Worst case running time: ??? under what conditions?"""
         # Find a node with the given item, if any
         node = self._find_node_recursive(item, self.root)
-        # TODO: Return the node's data if found, or None
+        # Return the node's data if found, or None
         return node.data if node.data is not None else None
 
     def insert(self, item):
@@ -194,28 +194,68 @@ class BinarySearchTree(object):
         items = []
         if not self.is_empty():
             # Traverse tree in-order from root, appending each node's item
-            self._traverse_in_order_recursive(self.root, items.append)
+            # self._traverse_in_order_recursive(self.root, items.append)
+            # items.append is a  pointer to afunc you can later call
+            # it hasn't been called yet.
+            self._traverse_in_order_iterative(self.root, items.append)
+
         # Return in-order list of all items in tree
         return items
 
     def _traverse_in_order_recursive(self, node, visit):
         """Traverse this binary tree with recursive in-order traversal (DFS).
         Start at the given node and visit each node with the given function.
-        TODO: Running time: ??? Why and under what conditions?
+        TODO: Running time: O(n) -> 6n Why and under what conditions?
         TODO: Memory usage: ??? Why and under what conditions?"""
-        # TODO: Traverse left subtree, if it exists
-        ...
-        # TODO: Visit this node's data with given function
-        ...
-        # TODO: Traverse right subtree, if it exists
-        ...
+        # a node has a depth a tree has a height.
+        # max size of stack is the height of the tree.
+        # so how much memory is being used from that?
+        # The mem cost is O(log(n)) if its balanced
+        # unbalanced - it will approach n
+        # How many func calls are being made? 2 for each node.
+        if node is not None:
+            if node.left is not None:
+                # the frame being popped off the call stack. All functions use a stack.
+                self._traverse_in_order_recursive(node.left, visit)
+            visit(node)
+            if node.right is not None:            
+                self._traverse_in_order_recursive(node.right, visit)
 
     def _traverse_in_order_iterative(self, node, visit):
         """Traverse this binary tree with iterative in-order traversal (DFS).
         Start at the given node and visit each node with the given function.
         TODO: Running time: ??? Why and under what conditions?
         TODO: Memory usage: ??? Why and under what conditions?"""
-        # TODO: Traverse in-order without using recursion (stretch challenge)
+        # Traverse in-order without using recursion (stretch challenge)
+        # the diff between recusv is you declare your own stack vs func calls making it
+        stack = [] # could use a linked list as well
+        done = False # tells when we're doing traversing
+        current = node 
+
+        # anytime u pushed something on the stack that means u will have to come back there soon so save it for later, then advance to its left node, then if you pop somethiing frmo the stack you visit it right away and then decend to the right side.
+        # so popping the stack is like, let me go back, similar how we go back to a recusrive funciton call
+        while(not done):
+            # Reach the left most Node of the current Node 
+            if current is not None: 
+                # Place pointer to a tree node on the stack  
+                # before traversing the node's left subtree 
+                # push the cure t onto the stack
+                stack.append(current.data)
+
+                current = current.left 
+
+            # BackTrack from the empty subtree and visit the Node 
+            # at the top of the stack; however, if the stack is  
+            # empty you are done
+            # current is NULL and stack is not empty
+            else:
+                if(len(stack) > 0):
+                    current = stack.pop()
+                    # set current = popped_item->right 
+                    visit(current.data)
+                    current = current.right
+                else:
+                    done = True
 
     def items_pre_order(self):
         """Return a pre-order list of all items in this binary search tree."""
@@ -231,14 +271,12 @@ class BinarySearchTree(object):
         Start at the given node and visit each node with the given function.
         TODO: Running time: ??? Why and under what conditions?
         TODO: Memory usage: ??? Why and under what conditions?"""
-        # TODO: Visit this node's data with given function
-        ...
-        # TODO: Traverse left subtree, if it exists
-        ...
-        # TODO: Traverse right subtree, if it exists
-        ...
+        if node is not None:
+            visit(node)
+            self._traverse_in_order_recursive(node.left, visit)
+            self._traverse_in_order_recursive(node.right, visit)
 
-    def _traverse_pre_order_iterative(  ):
+    def _traverse_pre_order_iterative(self, node, visit):
         """Traverse this binary tree with iterative pre-order traversal (DFS).
         Start at the given node and visit each node with the given function.
         TODO: Running time: ??? Why and under what conditions?
@@ -259,12 +297,10 @@ class BinarySearchTree(object):
         Start at the given node and visit each node with the given function.
         TODO: Running time: ??? Why and under what conditions?
         TODO: Memory usage: ??? Why and under what conditions?"""
-        # TODO: Traverse left subtree, if it exists
-        ...
-        # TODO: Traverse right subtree, if it exists
-        ...
-        # TODO: Visit this node's data with given function
-        ...
+        if node is not None:
+            self._traverse_in_order_recursive(node.left, visit)
+            self._traverse_in_order_recursive(node.right, visit)
+            visit(node)
 
     def _traverse_post_order_iterative(self, node, visit):
         """Traverse this binary tree with iterative post-order traversal (DFS).
