@@ -9,7 +9,8 @@ class SetTest(unittest.TestCase):
         test_set = Set([1, 2, 3])
         assert test_set.map.length() == 3
         assert test_set.contains(1) == True
-        assert test_set.contains(4) == False        
+        assert test_set.contains(4) == False  
+        assert test_set.size == 3      
     
     def test_contains(self):
         test_set = Set(['a','b','c','d','e'])
