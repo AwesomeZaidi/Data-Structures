@@ -22,7 +22,8 @@ class Set(object):
         """add element to this set, if not present already"""
         # check if its unique by 
         # if not self.contains(element):
-        self.map.set(element, None)
+        if self.map.contains(element) == False:
+            self.map.set(element, None)
         self.size += 1
         return self.size
 
