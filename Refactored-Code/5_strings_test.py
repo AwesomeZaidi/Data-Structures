@@ -1,8 +1,10 @@
 #!python
 
-from strings import contains, find_index, find_all_indexes
+strings = __import__('5_strings', fromlist=['contains', 'find_index', 'find_all_indexes'])
+contains = strings.contains
+find_index = strings.find_index
+find_all_indexes = strings.find_all_indexes
 import unittest
-
 
 class StringsTest(unittest.TestCase):
 

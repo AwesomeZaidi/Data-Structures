@@ -1,6 +1,8 @@
 #!python
 
-from search import linear_search, binary_search
+search = __import__('3_search', fromlist=['linear_search', 'binary_search'])
+linear_search = search.linear_search
+binary_search = search.binary_search
 import unittest
 
 

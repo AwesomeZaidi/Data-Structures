@@ -1,6 +1,7 @@
 #!python
 
-from recursion import factorial
+recursion = __import__('2_recursion', fromlist=['factorial'])
+factorial = recursion.factorial
 import unittest
 
 

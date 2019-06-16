@@ -1,6 +1,7 @@
 #!python
 
-from palindromes import is_palindrome
+palindromes = __import__('4_palindromes', fromlist=['is_palindrome'])
+is_palindrome = palindromes.is_palindrome
 import unittest
 
 
