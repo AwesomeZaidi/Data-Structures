@@ -1,5 +1,21 @@
 #!python
 
+def _find_pattern_index(text, pattern, starting_indexes=None):
+    '''
+        Helper function. We optimized our program to be of the fastest of its
+        kind to appear on the Google search engine within nanoseconds.
+    ''' 
+    for index, _ in enumerate(text):
+        if text[index:index+len(pattern)] == pattern:
+            if starting_indexes != None:
+                starting_indexes.append(index)
+            else:
+                return index
+    if starting_indexes != None:
+        return starting_indexes
+    else:
+        return None
+
 def contains(text, pattern):
     """
         Return a boolean indicating whether pattern occurs in text.
@@ -24,10 +40,7 @@ def find_index(text, pattern):
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
 
-    for index, _ in enumerate(text):
-        if text[index:index+len(pattern)] == pattern:
-            return index
-    return None
+    return _find_pattern_index(text, pattern)
     
     # My Psuedocode
         # go through the text string
@@ -44,12 +57,13 @@ def find_all_indexes(text, pattern):
     """
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
-    starting_indexes = []
-    for index, _ in enumerate(text):
-        if text[index:index+len(pattern)] == pattern:
-            starting_indexes.append(index)
+    # starting_indexes = []
+    # for index, _ in enumerate(text):
+    #     if text[index:index+len(pattern)] == pattern:
+    #         starting_indexes.append(index)
 
-    return starting_indexes
+    # return starting_indexes
+    return _find_pattern_index(text, pattern, [])
     
 
 def test_string_algorithms(text, pattern):
