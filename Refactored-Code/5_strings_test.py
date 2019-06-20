@@ -19,6 +19,7 @@ class StringsTest(unittest.TestCase):
         assert contains('abc', 'abc') is True  # all strings contain themselves
         assert contains('aaa', 'a') is True  # multiple occurrences
         assert contains('aaa', 'aa') is True  # overlapping pattern
+        assert contains('2nr238gpY*f239pY*&TbpY*', 'bpY*') is True  # overlapping pattern
         # TODO: Write more positive test cases with assert is True statements
         # ...
 
@@ -52,6 +53,8 @@ class StringsTest(unittest.TestCase):
         assert find_index('abc', 'abc') == 0  # all strings contain themselves
         assert find_index('aaa', 'a') == 0  # multiple occurrences
         assert find_index('aaa', 'aa') == 0  # overlapping pattern
+        assert find_index('aaaaaag', 'aaag') == 3  # overlapping pattern
+
         # TODO: Write more positive test cases with assert equal int statements
         # ...
 
