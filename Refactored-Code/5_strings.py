@@ -13,8 +13,8 @@ def _find_pattern_index(text, pattern, starting_indexes=None):
                 return index
     if starting_indexes != None:
         return starting_indexes
-    else:
-        return None
+    
+    return None
 
 def contains(text, pattern):
     """
@@ -41,11 +41,6 @@ def find_index(text, pattern):
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
 
     return _find_pattern_index(text, pattern)
-    
-    # My Psuedocode
-        # go through the text string
-        # check if the char + len of pattern is there
-        # if so return the index
 
 def find_all_indexes(text, pattern):
     """
@@ -57,12 +52,7 @@ def find_all_indexes(text, pattern):
     """
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
-    # starting_indexes = []
-    # for index, _ in enumerate(text):
-    #     if text[index:index+len(pattern)] == pattern:
-    #         starting_indexes.append(index)
-
-    # return starting_indexes
+    
     return _find_pattern_index(text, pattern, [])
     
 
@@ -97,3 +87,8 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+# My Psuedocode for find_index
+    # go through the text string
+    # check if the char + len of pattern is there
+    # if so return the index
