@@ -15,6 +15,7 @@ class LinkedList(object):
         self.head = None
         self.tail = None
         self.size = 0
+        print('self.size:', self.size)
         if iterable is not None:
             for item in iterable:
                 self.append(item)
@@ -30,8 +31,7 @@ class LinkedList(object):
     def items(self):
         """Best and worst case running time: Theta(n) for n items in the list
         because we always need to loop through all n nodes."""
-        # Create an empty list of results
-        result = []
+        result = [] # Create an empty list of results
         node = self.head  # Constant time to assign a var reference
         # Loop until the node is None, which is one node too far past the tail
         while node is not None:  # Always n iterations because no early exit
