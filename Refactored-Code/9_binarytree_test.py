@@ -1,6 +1,9 @@
 #!python
 
-from binarytree import BinarySearchTree, BinaryTreeNode
+
+binarytree = __import__('9_binarytree', fromlist=['BinarySearchTree', 'BinaryTreeNode'])
+BinarySearchTree = binarytree.BinarySearchTree
+BinaryTreeNode = binarytree.BinaryTreeNode
 import unittest
 
 
