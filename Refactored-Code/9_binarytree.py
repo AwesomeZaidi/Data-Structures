@@ -277,9 +277,9 @@ class BinarySearchTree(object):
         TODO: Running time: ??? Why and under what conditions?
         TODO: Memory usage: ??? Why and under what conditions?"""
         if node is not None:
-            self._traverse_in_order_recursive(node.left, visit)
-            self._traverse_in_order_recursive(node.right, visit)
-            visit(node)
+            self._traverse_post_order_recursive(node.left, visit)
+            self._traverse_post_order_recursive(node.right, visit)
+            visit(node.data)
 
     def items_level_order(self):
         """Return a level-order list of all items in this binary search tree."""
